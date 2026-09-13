@@ -9,8 +9,8 @@ export default function SignIn() {
             <View style={styles.idContainer}>
                 <Field label="Username" />
                 <Field label="Password" secureTextEntry={true} />
-                <Button color="#f2a93b" title="Login" onPress={() => handleClick("Login")}/>
-                <Text style={{ color: '#3d337d', fontWeight: 'bold' }}>Sign up!</Text>
+                <Button color="#f2a93b" title="Login" onPress={() => handleClick("Login")} />
+                <Text style={{ color: '#3d337d', fontWeight: 'bold', alignSelf: 'center' }}>Sign up!</Text>
             </View>
         </View>
     );

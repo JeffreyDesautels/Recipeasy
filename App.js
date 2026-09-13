@@ -1,5 +1,5 @@
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import MainPage from './pages/MainPage.js';
+import RecipeList from './pages/RecipeList.js';
 import SignIn from './pages/SignIn.js';
 import SignUp from './pages/SignUp.js';
 import { styles } from './style/Style.js';
@@ -10,7 +10,7 @@ export default function App() {
 		// peut etre remplacer toutes les views pour juste le field dans les pages principales
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>
-				<MainPage/>
+				<RecipeList />
 				{/* <SignIn/> */}
 				{/* <SignUp/> */}
 			</SafeAreaView>

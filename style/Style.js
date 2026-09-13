@@ -15,8 +15,9 @@ export const styles = StyleSheet.create({
 		// borderWidth: 1,
 		// borderColor: 'red',
 		// height: '50%',
-		// width: '50%',
-		alignItems: 'center',
-		justifyContent: 'center',
+		maxWidth: 200,
+		width: '100%',
+		// alignItems: 'center',
+		// justifyContent: 'center',
 	},
 });

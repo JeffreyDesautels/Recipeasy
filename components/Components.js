@@ -2,14 +2,16 @@ import { TextInput, View } from 'react-native';
 
 export function Field(props) {
     return (
-        <View style={props.style}>
+        // <View style={props.style}>
             <TextInput
                 style={[{ borderColor: 'white', borderWidth: 1, color: 'white', padding: 10 }, props.style]}
                 placeholder={props.label}
+                placeholderTextColor="#ffffff"
+                textAlignVertical="top"
                 secureTextEntry={props.secureTextEntry}
                 multiline={props.multiline}
             />
-        </View>
+        // </View>
     )
 }
 
