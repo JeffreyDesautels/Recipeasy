@@ -5,7 +5,7 @@ import { styles } from '../style/Style.js';
 export default function SignIn() {
     // Premiere page
     return (
-        <View style={{ flex: 1, flexGrow: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.logInContainers}>
             <View style={styles.idContainer}>
                 <Field label="Username" />
                 <Field label="Password" secureTextEntry={true} />

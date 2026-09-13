@@ -5,19 +5,25 @@ export const styles = StyleSheet.create({
 		flex: 1,
 		padding: 20,
 		backgroundColor: '#377e7f',
-		// alignItems: 'center',
-		// justifyContent: 'center',
 	},
 
 	idContainer: {
 		flexDirection: 'column',
 		rowGap: 20,
-		// borderWidth: 1,
-		// borderColor: 'red',
-		// height: '50%',
 		maxWidth: 200,
 		width: '100%',
-		// alignItems: 'center',
-		// justifyContent: 'center',
 	},
+
+	logInContainers: {
+		flex: 1,
+		alignItems: 'center', 
+		justifyContent: 'center'
+	},
+	
+	pickerStyle: {
+		color: '#FFFFFF', 
+		backgroundColor: '#377e7f', 
+		borderWidth: 0, 
+		width: '30%'
+	}
 });
