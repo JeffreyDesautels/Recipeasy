@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: '#377e7f',
 	},
 
-	idContainer: {
+	credentialsContainer: {
 		flexDirection: 'column',
 		rowGap: 20,
 		maxWidth: 200,

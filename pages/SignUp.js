@@ -6,7 +6,7 @@ export default function SignUp() {
 	// Deuxieme page
 	return (
 		<View style={styles.logInContainers}>
-			<View style={styles.idContainer}>
+			<View style={styles.credentialsContainer}>
 				<Field label="Username" />
 				<Field label="Password" secureTextEntry={true} />
 				<Field label="Password confirmation" secureTextEntry={true} />

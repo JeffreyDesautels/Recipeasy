@@ -6,7 +6,7 @@ export default function SignIn() {
     // Premiere page
     return (
         <View style={styles.logInContainers}>
-            <View style={styles.idContainer}>
+            <View style={styles.credentialsContainer}>
                 <Field label="Username" />
                 <Field label="Password" secureTextEntry={true} />
                 <Button color="#f2a93b" title="Login" onPress={() => handleClick("Login")} />

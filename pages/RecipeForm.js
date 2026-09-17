@@ -31,7 +31,7 @@ export default function RecipeList() {
 	];
 
 	return (
-		<View style={{ flex: 1, }}>
+		<View style={{ flex: 1 }}>
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around', }}>
 				<RadioGroup layout="row" radioButtons={options} />
 			</View>
