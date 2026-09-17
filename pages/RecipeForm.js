@@ -4,31 +4,30 @@ import { Picker } from '@react-native-picker/picker';
 import { Field, handleClick } from '../components/Components.js';
 import { styles } from '../style/Style.js';
 
-export default function RecipeList() {
+export default function RecipeForm() {
 	// Troisieme page
 	const options = [
 		{
 			id: '1',
 			label: 'Breakfast',
 			value: '1',
-			color: '#FFFFFF',
-			labelStyle: { color: '#FFFFFF' }
 		},
 		{
 			id: '2',
 			label: 'Lunch',
 			value: '2',
-			color: '#FFFFFF',
-			labelStyle: { color: '#FFFFFF' }
 		},
 		{
 			id: '3',
-			label: 'Dinner',
+			label: 'Diner',
 			value: '3',
-			color: '#FFFFFF',
-			labelStyle: { color: '#FFFFFF' }
 		}
-	];
+	].map(({ id, label }) => ({
+		id,
+		label,
+		color: '#FFFFFF',
+		labelStyle: { color: '#FFFFFF' }
+	}));
 
 	return (
 		<View style={{ flex: 1 }}>
