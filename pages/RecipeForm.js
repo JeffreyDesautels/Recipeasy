@@ -6,25 +6,10 @@ import { styles } from '../style/Style.js';
 
 export default function RecipeForm() {
 	// Troisieme page
-	const options = [
-		{
-			id: '1',
-			label: 'Breakfast',
-			value: '1',
-		},
-		{
-			id: '2',
-			label: 'Lunch',
-			value: '2',
-		},
-		{
-			id: '3',
-			label: 'Diner',
-			value: '3',
-		}
-	].map(({ id, label }) => ({
-		id,
-		label,
+	const radioGroupLabels = ['Breakfast', 'Lunch', 'Diner'];
+	const options = radioGroupLabels.map((labels, index) => ({
+		id: index,
+		label: labels,
 		color: '#FFFFFF',
 		labelStyle: { color: '#FFFFFF' }
 	}));
