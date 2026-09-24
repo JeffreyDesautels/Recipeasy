@@ -3,7 +3,6 @@ import { Field, handleClick } from '../components/Components.js';
 import { styles } from '../style/Style.js';
 
 export default function SignUp() {
-	// Deuxieme page
 	return (
 		<View style={styles.logInContainers}>
 			<View style={styles.credentialsContainer}>
