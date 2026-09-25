@@ -13,8 +13,19 @@ export default function App() {
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView style={styles.container}>
-				<NavigationContainer style={styles.container}>
-					<Stack.Navigator initialRouteName="LogIn">
+				<NavigationContainer>
+					<Stack.Navigator 
+						initialRouteName="LogIn" 
+						screenOptions={{
+							contentStyle: {
+								backgroundColor: '#377e7f'
+							},
+							headerStyle: {
+								backgroundColor: '#6a00ff'
+							},
+							headerTintColor: 'white'
+						}}
+					>
 						<Stack.Screen
 							name="LogIn"
 							component={LogIn}
