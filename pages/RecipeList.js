@@ -1,22 +1,27 @@
-import { Text, Button, View } from 'react-native';
+import { useState } from 'react';
+import { Text, Button, View, Pressable } from 'react-native';
 import RadioGroup from 'react-native-radio-buttons-group';
 import { Picker } from '@react-native-picker/picker';
 import { Field, handleClick } from '../components/Components.js';
 import { styles } from '../style/Style.js';
 
 export default function RecipeList({ navigation }) {
-    function handlePressed() {
-        // if (display.name.trim() == '') {
+    const [recipes, setRecipes] = useState({});
 
-        // } else {
-            navigation.navigate('LogIn');
-        // }
+    console.log(recipes);
+
+    function handleNewRecipe() {
+        navigation.navigate('RecipeForm');
     }
 
-	return (
-		<View style={{ flex: 1 }}>
+    return (
+        <View style={{ flex: 1, padding: 10 }}>
             <Text>Allo</Text>
-            <Button color="#f2a93b" title="Login" onPress={() => handlePressed()} />
-		</View>
-	);
+            <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end', borderRadius: 10000 }}>
+                <Pressable style={styles.newRecipeButton} onPress={handleNewRecipe}>
+                    <Text style={{ color: 'white', fontSize: 28 }}>+</Text>
+                </Pressable>
+            </View>
+        </View>
+    );
 }
