@@ -1,11 +1,12 @@
-import { Text, Button, View } from 'react-native';
+import { Text, Button, View, Pressable } from 'react-native';
 import RadioGroup from 'react-native-radio-buttons-group';
 import { Picker } from '@react-native-picker/picker';
 import { Field, handleClick } from '../components/Components.js';
 import { styles } from '../style/Style.js';
 
-export default function RecipeForm({ navigation }) {
-	// const display = route.params;
+export default function RecipeForm({ navigation, route }) {
+	// TODO adapter pour recevoir une recette si d'un view
+	const { mode } = route.params;
 
 	const radioGroupLabels = ['Breakfast', 'Lunch', 'Diner'];
 	const options = radioGroupLabels.map((labels, index) => ({
@@ -44,7 +45,10 @@ export default function RecipeForm({ navigation }) {
 			</View>
 
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-				<Button color="#f2a93b" title="Save" onPress={() => handleClick("Save")} />
+				{/* <Button color="#f2a93b" title="Save" onPress={() => handleClick("Save")} /> */}
+				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }}>
+					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
+				</Pressable>
 			</View>
 		</View>
 	);
