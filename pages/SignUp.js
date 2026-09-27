@@ -4,7 +4,8 @@ import { styles } from '../style/Style.js';
 
 export default function SignUp({ navigation }) {
 	function handleCreateAccount() {
-		navigation.navigate('RecipeList');
+		navigation.popToTop();
+		navigation.replace('RecipeList');
 	}
 
 	return (

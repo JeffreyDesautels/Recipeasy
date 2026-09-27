@@ -1,4 +1,4 @@
-import { Text, Button, View } from 'react-native';
+import { Text, Button, Pressable, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import LogIn from './pages/LogIn.js';
 import SignUp from './pages/SignUp.js';
@@ -35,7 +35,9 @@ export default function App() {
 						component={RecipeList} 
 						// demander a james comment faire pour ajouter de la navigation depuis l'app header
 						options={{headerRight: () => (
-							<Text style={{color: 'white'}} onPress={() => alert('Log out')}>Log out</Text>
+							<Pressable style={{ paddingRight: 10 }} onPress={() => alert('Log out')}>
+								<Text style={{ color: 'white' }}>Log out</Text>
+							</Pressable>
 						)}}
 					/>
 					<Stack.Screen name="RecipeForm" component={RecipeForm} />

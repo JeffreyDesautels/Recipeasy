@@ -5,6 +5,8 @@ import { Field, handleClick } from '../components/Components.js';
 import { styles } from '../style/Style.js';
 
 export default function RecipeForm({ navigation }) {
+	// const display = route.params;
+
 	const radioGroupLabels = ['Breakfast', 'Lunch', 'Diner'];
 	const options = radioGroupLabels.map((labels, index) => ({
 		id: index,

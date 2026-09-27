@@ -4,7 +4,7 @@ import { styles } from '../style/Style.js';
 
 export default function LogIn({ navigation }) {
     function handleLogIn() {
-        navigation.navigate('RecipeList');
+        navigation.replace('RecipeList');
     }
 
     function handleSignUp() {
