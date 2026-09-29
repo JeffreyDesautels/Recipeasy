@@ -11,6 +11,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+	function LogOutBtn({ navigation }) {
+		return (
+			<Pressable style={{ paddingRight: 10 }} onPress={() => navigation.replace('LogIn')}>
+				<Text style={{ color: 'white' }}>Log out</Text>
+			</Pressable>
+		)
+	}
+
 	return (
 		<SafeAreaProvider>
 			{/* peut etre mettre dans les pages a la place, a voir. Demander a James la meilleure maniere de proceder. */}
@@ -30,17 +38,25 @@ export default function App() {
 				>
 					<Stack.Screen name="LogIn" component={LogIn} />
 					<Stack.Screen name="SignUp" component={SignUp} />
-					<Stack.Screen 
-						name="RecipeList" 
-						component={RecipeList} 
+					<Stack.Screen
+						name="RecipeList"
+						component={RecipeList}
 						// demander a james comment faire pour ajouter de la navigation depuis l'app header
-						options={{headerRight: () => (
-							<Pressable style={{ paddingRight: 10 }} onPress={() => alert('Log out')}>
-								<Text style={{ color: 'white' }}>Log out</Text>
-							</Pressable>
-						)}}
+						options={({ navigation }) => ({
+							headerRight: () => (
+								<LogOutBtn navigation={navigation} />
+							)
+						})}
 					/>
-					<Stack.Screen name="RecipeForm" component={RecipeForm} />
+					<Stack.Screen
+						name="RecipeForm"
+						component={RecipeForm}
+						options={({ navigation }) => ({
+							headerRight: () => (
+								<LogOutBtn navigation={navigation} />
+							)
+						})}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 			{/* </SafeAreaView> */}
