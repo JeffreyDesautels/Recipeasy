@@ -9,6 +9,7 @@ export function Field(props) {
             textAlignVertical="top"
             secureTextEntry={props.secureTextEntry}
             multiline={props.multiline}
+            value={props.value}
         />
     )
 }

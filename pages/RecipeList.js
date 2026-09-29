@@ -42,12 +42,12 @@ export default function RecipeList({ navigation }) {
         return 0;
     });
 
-    console.log(recipes);
-
-
+    function getRandomRecipe() {
+        return recipes[Math.floor(Math.random() * recipes.length)];
+    }
 
     function handleViewRecipe() {
-        navigation.navigate('RecipeForm', { mode: 'viewRecipe' });
+        navigation.navigate('RecipeForm', { mode: 'viewRecipe', recipe: getRandomRecipe() });
     }
 
     function handleNewRecipe() {
@@ -55,7 +55,7 @@ export default function RecipeList({ navigation }) {
     }
 
     return (
-        <View style={{ flex: 1, padding: 10 }}>
+        <View style={{ flex: 1, padding: 20 }}>
             {/* TODO travailler sur le bouton view (envoyer une recette random) */}
             <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-start', borderRadius: 10000 }}>
                 <Pressable style={[styles.newRecipeButton, { backgroundColor: 'blue' }]} onPress={handleViewRecipe}>
