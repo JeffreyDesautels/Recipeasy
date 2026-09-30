@@ -11,28 +11,38 @@ export default function RecipeForm({ navigation, route }) {
 
 	console.log(route.params);
 
+	const [recipeInfos, setRecipeInfos] = useState({
+		category: undefined,
+		name: '',
+		durationHours: 0,
+		durationMinutes: 0,
+		description: '',
+		...recipe
+	});
+
+	console.log(recipeInfos);
+
 	const radioGroupLabels = ['Breakfast', 'Lunch', 'Diner'];
 	const options = radioGroupLabels.map((labels, index) => ({
 		id: index,
 		label: labels,
-		color: '#FFFFFF',
+		color: '#f2a93b',
 		labelStyle: { color: '#FFFFFF' }
 	}));
-
-	const [selectedId, setSelectedId] = useState();
 
 	return (
 		<View style={{ flex: 1, padding: 20 }}>
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around', }}>
-				<RadioGroup layout="row" radioButtons={options} onPress={setSelectedId} selectedId={selectedId} />
+				{/*onPress={setSelectedId}*/}
+				<RadioGroup layout="row" radioButtons={options} selectedId={recipeInfos.category - 1} onPress={(value) => setRecipeInfos({ ...recipeInfos, category: value + 1})} />
 			</View>
 
-			<Field label="Name" value={{recipe: 'name'}} />
+			<Field label="Name" value={recipeInfos.name} onChangeText={(text) => setRecipeInfos({ ...recipeInfos, name: text })} />
 
 			<View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', columnGap: 10 }}>
 				<Text style={{ color: '#FFFFFF' }}>Duration</Text>
 
-				<Picker style={styles.pickerStyle} dropdownIconColor={'white'} selectedValue={{recipe: 'durationHours'}}> {
+				<Picker style={styles.pickerStyle} dropdownIconColor={'white'} selectedValue={recipeInfos.durationHours} onValueChange={(value) => setRecipeInfos({ ...recipeInfos, durationHours: value})} > {
 					Array.from({ length: 13 }, (v, i) => {
 						return <Picker.Item label={`${i} h`} value={i} key={i}></Picker.Item>
 					})
@@ -41,7 +51,7 @@ export default function RecipeForm({ navigation, route }) {
 
 				<Text style={{ color: '#FFFFFF' }}>:</Text>
 
-				<Picker style={styles.pickerStyle} dropdownIconColor={'white'}> {
+				<Picker style={styles.pickerStyle} dropdownIconColor={'white'} selectedValue={recipeInfos.durationMinutes} onValueChange={(value) => setRecipeInfos({ ...recipeInfos, durationMinutes: value})} > {
 					Array.from({ length: 60 }, (v, i) => {
 						return <Picker.Item label={`${i} mins`} value={i} key={i}></Picker.Item>
 					})
@@ -50,7 +60,7 @@ export default function RecipeForm({ navigation, route }) {
 			</View>
 
 			<View style={{ flex: 8 }}>
-				<Field style={{ height: '100%' }} label="Description" multiline={true} />
+				<Field style={{ height: '100%' }} label="Description" multiline={true} value={recipeInfos.description} onChangeText={(text) => setRecipeInfos({ ...recipeInfos, description: text })} />
 			</View>
 
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

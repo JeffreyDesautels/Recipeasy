@@ -10,6 +10,7 @@ export function Field(props) {
             secureTextEntry={props.secureTextEntry}
             multiline={props.multiline}
             value={props.value}
+            onChangeText={props.onChangeText}
         />
     )
 }
