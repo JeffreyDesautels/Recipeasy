@@ -45,7 +45,8 @@ export default function App() {
 							options={({ navigation }) => ({
 								headerRight: () => (
 									<LogOutBtn navigation={navigation} />
-								)
+								),
+								headerBackVisible: false
 							})}
 						/>
 						<Stack.Screen name="RecipeForm" component={RecipeForm}

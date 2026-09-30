@@ -1,12 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Text, Button, View, Pressable } from 'react-native';
 import RadioGroup from 'react-native-radio-buttons-group';
 import { Picker } from '@react-native-picker/picker';
 import { Field, handleClick } from '../components/Components.js';
 import { styles } from '../style/Style.js';
 
-export default function RecipeList({ navigation }) {
+export default function RecipeList({ navigation, route }) {
     // TODO envisager une liste d'elements JSON?
+
+    // const { newRecipe } = route.params;
+
+    // console.log(newRecipe);
+
     const [recipes, setRecipes] = useState([
         {
             category: 1,
@@ -31,8 +36,19 @@ export default function RecipeList({ navigation }) {
         },
     ]);
 
+    useEffect(() => {
+        console.log(`effect ${JSON.stringify(route.params)}`);
+        
+        if (route.params) {
+            console.log(route.params);
+            const newRecipe = route.params.newRecipe;
+            setRecipes({...recipes, newRecipe});
+        }
+    }, [route.params]);
+
     // TODO faire une copie, destructuring
-    recipes.sort((a, b) => {
+    const sortedRecipes = [...recipes];
+    sortedRecipes.sort((a, b) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
 
@@ -63,7 +79,7 @@ export default function RecipeList({ navigation }) {
                 </Pressable>
             </View>
 
-            <Text style={{ color: 'white' }}>{JSON.stringify(recipes, null, 4)}</Text>
+            <Text style={{ color: 'white' }}>{JSON.stringify(sortedRecipes, null, 4)}</Text>
 
             <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end', borderRadius: 10000 }}>
                 <Pressable style={styles.newRecipeButton} onPress={handleNewRecipe}>

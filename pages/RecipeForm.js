@@ -9,8 +9,6 @@ export default function RecipeForm({ navigation, route }) {
 	// TODO adapter pour recevoir une recette si d'un view
 	const { mode, recipe } = route.params;
 
-	console.log(route.params);
-
 	const [recipeInfos, setRecipeInfos] = useState({
 		category: undefined,
 		name: '',
@@ -20,21 +18,42 @@ export default function RecipeForm({ navigation, route }) {
 		...recipe
 	});
 
-	console.log(recipeInfos);
-
 	const radioGroupLabels = ['Breakfast', 'Lunch', 'Diner'];
 	const options = radioGroupLabels.map((labels, index) => ({
-		id: index,
+		id: index + 1,
 		label: labels,
-		color: '#f2a93b',
+		color: '#FFFFFF',
 		labelStyle: { color: '#FFFFFF' }
 	}));
+
+	function handleSaveRecipe() {
+		// console.log(recipeInfos);
+		var flag = false;
+
+		if (recipeInfos.category == undefined) flag = true;
+		if (!recipeInfos.name.trim()) flag = true;
+		if (recipeInfos.durationHours == 0 && recipeInfos.durationMinutes == 0) flag = true;
+		if (!recipeInfos.description.trim()) flag = true;
+
+		if (!flag) {
+			navigation.popToTop();
+			navigation.replace('RecipeList', { newRecipe: recipeInfos });
+		} else {
+			console.log('erreur');
+		}
+	}
+
+	function handleDeleteRecipe() {
+		// console.log(recipeInfos);
+		navigation.popToTop();
+		navigation.replace('RecipeList');
+	}
 
 	return (
 		<View style={{ flex: 1, padding: 20 }}>
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around', }}>
 				{/*onPress={setSelectedId}*/}
-				<RadioGroup layout="row" radioButtons={options} selectedId={recipeInfos.category - 1} onPress={(value) => setRecipeInfos({ ...recipeInfos, category: value + 1})} />
+				<RadioGroup layout="row" radioButtons={options} selectedId={recipeInfos.category} onPress={(value) => setRecipeInfos({ ...recipeInfos, category: value })} />
 			</View>
 
 			<Field label="Name" value={recipeInfos.name} onChangeText={(text) => setRecipeInfos({ ...recipeInfos, name: text })} />
@@ -42,7 +61,7 @@ export default function RecipeForm({ navigation, route }) {
 			<View style={{ flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', columnGap: 10 }}>
 				<Text style={{ color: '#FFFFFF' }}>Duration</Text>
 
-				<Picker style={styles.pickerStyle} dropdownIconColor={'white'} selectedValue={recipeInfos.durationHours} onValueChange={(value) => setRecipeInfos({ ...recipeInfos, durationHours: value})} > {
+				<Picker style={styles.pickerStyle} dropdownIconColor={'white'} selectedValue={recipeInfos.durationHours} onValueChange={(value) => setRecipeInfos({ ...recipeInfos, durationHours: value })} > {
 					Array.from({ length: 13 }, (v, i) => {
 						return <Picker.Item label={`${i} h`} value={i} key={i}></Picker.Item>
 					})
@@ -51,7 +70,7 @@ export default function RecipeForm({ navigation, route }) {
 
 				<Text style={{ color: '#FFFFFF' }}>:</Text>
 
-				<Picker style={styles.pickerStyle} dropdownIconColor={'white'} selectedValue={recipeInfos.durationMinutes} onValueChange={(value) => setRecipeInfos({ ...recipeInfos, durationMinutes: value})} > {
+				<Picker style={styles.pickerStyle} dropdownIconColor={'white'} selectedValue={recipeInfos.durationMinutes} onValueChange={(value) => setRecipeInfos({ ...recipeInfos, durationMinutes: value })} > {
 					Array.from({ length: 60 }, (v, i) => {
 						return <Picker.Item label={`${i} mins`} value={i} key={i}></Picker.Item>
 					})
@@ -66,7 +85,7 @@ export default function RecipeForm({ navigation, route }) {
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 				{/* <Button color="#f2a93b" title="Save" onPress={() => handleClick("Save")} /> */}
 				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }}>
-					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
+					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }} onPress={mode === 'newRecipe' ? handleSaveRecipe : handleDeleteRecipe}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
 				</Pressable>
 			</View>
 		</View>
