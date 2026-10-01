@@ -24,7 +24,7 @@ export default function App() {
 		<SafeAreaProvider>
 			<ToastManager />
 			{/* peut etre mettre dans les pages a la place, a voir. Demander a James la meilleure maniere de proceder. */}
-			<SafeAreaView style={styles.container}>
+			{/* <SafeAreaView style={styles.container}> */}
 				<NavigationContainer>
 					<Stack.Navigator
 						initialRouteName="LogIn"
@@ -52,15 +52,10 @@ export default function App() {
 							})}
 						/>
 						<Stack.Screen name="RecipeForm" component={RecipeForm}
-						// options={({ navigation }) => ({
-						// 	headerRight: () => (
-						// 		<LogOutBtn navigation={navigation} />
-						// 	)
-						// })}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>
-			</SafeAreaView>
+			{/* </SafeAreaView> */}
 		</SafeAreaProvider>
 	)
 }
