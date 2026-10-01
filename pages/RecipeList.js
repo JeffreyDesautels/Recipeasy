@@ -1,23 +1,16 @@
 import { useState, useEffect } from 'react';
-import { Text, Button, View, Pressable } from 'react-native';
-import RadioGroup from 'react-native-radio-buttons-group';
-import { Picker } from '@react-native-picker/picker';
-import { Field, handleClick } from '../components/Components.js';
+import { Text, View, Pressable } from 'react-native';
 import { styles } from '../style/Style.js';
 
 export default function RecipeList({ navigation, route }) {
     // TODO envisager une liste d'elements JSON?
-
-    // const { newRecipe } = route.params;
-
-    // console.log(newRecipe);
 
     const [recipes, setRecipes] = useState([
         {
             category: 1,
             name: 'Zebre',
             durationHours: 0,
-            durationMinutes: 0,
+            durationMinutes: 1,
             description: 'jsp'
         },
         {
@@ -37,18 +30,13 @@ export default function RecipeList({ navigation, route }) {
     ]);
 
     useEffect(() => {
-        console.log(`effect ${JSON.stringify(route.params)}`);
-        
-        if (route.params) {
-            console.log(route.params);
+        if (route.params?.newRecipe) {
             const newRecipe = route.params.newRecipe;
-            setRecipes({...recipes, newRecipe});
+            setRecipes([...recipes, newRecipe]);
         }
-    }, [route.params]);
+    }, [route.params?.newRecipe]);
 
-    // TODO faire une copie, destructuring
-    const sortedRecipes = [...recipes];
-    sortedRecipes.sort((a, b) => {
+    const sortedRecipes = [...recipes].sort((a, b) => {
         const nameA = a.name.toUpperCase();
         const nameB = b.name.toUpperCase();
 
@@ -79,7 +67,7 @@ export default function RecipeList({ navigation, route }) {
                 </Pressable>
             </View>
 
-            <Text style={{ color: 'white' }}>{JSON.stringify(sortedRecipes, null, 4)}</Text>
+            <Text style={{ color: 'white' }}>{JSON.stringify(sortedRecipes)}</Text>
 
             <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end', borderRadius: 10000 }}>
                 <Pressable style={styles.newRecipeButton} onPress={handleNewRecipe}>

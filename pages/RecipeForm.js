@@ -1,9 +1,10 @@
-import { Text, Button, View, Pressable } from 'react-native';
+import { Text, View, Pressable } from 'react-native';
 import { useState } from 'react';
 import RadioGroup from 'react-native-radio-buttons-group';
 import { Picker } from '@react-native-picker/picker';
-import { Field, handleClick } from '../components/Components.js';
+import { Field } from '../components/Components.js';
 import { styles } from '../style/Style.js';
+import { Toast } from 'toastify-react-native';
 
 export default function RecipeForm({ navigation, route }) {
 	// TODO adapter pour recevoir une recette si d'un view
@@ -18,7 +19,7 @@ export default function RecipeForm({ navigation, route }) {
 		...recipe
 	});
 
-	const radioGroupLabels = ['Breakfast', 'Lunch', 'Diner'];
+	const radioGroupLabels = ['Breakfast', 'Lunch', 'Dinner'];
 	const options = radioGroupLabels.map((labels, index) => ({
 		id: index + 1,
 		label: labels,
@@ -27,26 +28,29 @@ export default function RecipeForm({ navigation, route }) {
 	}));
 
 	function handleSaveRecipe() {
-		// console.log(recipeInfos);
-		var flag = false;
+		let errorLog = [];
 
-		if (recipeInfos.category == undefined) flag = true;
-		if (!recipeInfos.name.trim()) flag = true;
-		if (recipeInfos.durationHours == 0 && recipeInfos.durationMinutes == 0) flag = true;
-		if (!recipeInfos.description.trim()) flag = true;
+		if (recipeInfos.category == undefined) {
+			errorLog.push("Aucune catégorie choisie!");
+		}
+		if (!recipeInfos.name.trim()) {
+			errorLog.push("Aucun nom choisit!");
+		}
+		if (recipeInfos.durationHours == 0 && recipeInfos.durationMinutes == 0) {
+			errorLog.push("Durée invalide!");
+		}
 
-		if (!flag) {
-			navigation.popToTop();
-			navigation.replace('RecipeList', { newRecipe: recipeInfos });
+		if (errorLog.length == 0) {
+			Toast.success("Valid recipe added!");
+			navigation.popTo('RecipeList', { newRecipe: recipeInfos });
 		} else {
-			console.log('erreur');
+			Toast.error(errorLog.join("\n"));
 		}
 	}
 
 	function handleDeleteRecipe() {
 		// console.log(recipeInfos);
-		navigation.popToTop();
-		navigation.replace('RecipeList');
+		navigation.popTo('RecipeList');
 	}
 
 	return (
@@ -84,8 +88,8 @@ export default function RecipeForm({ navigation, route }) {
 
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
 				{/* <Button color="#f2a93b" title="Save" onPress={() => handleClick("Save")} /> */}
-				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }}>
-					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }} onPress={mode === 'newRecipe' ? handleSaveRecipe : handleDeleteRecipe}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
+				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }}  onPress={mode === 'newRecipe' ? handleSaveRecipe : handleDeleteRecipe}>
+					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
 				</Pressable>
 			</View>
 		</View>

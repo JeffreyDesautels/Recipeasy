@@ -1,4 +1,4 @@
-import { Text, Button, Pressable, View } from 'react-native';
+import { Text, Pressable } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import LogIn from './pages/LogIn.js';
 import SignUp from './pages/SignUp.js';
@@ -7,6 +7,7 @@ import RecipeForm from './pages/RecipeForm.js';
 import { styles } from './style/Style.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ToastManager from 'toastify-react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export default function App() {
 
 	return (
 		<SafeAreaProvider>
+			<ToastManager />
 			{/* peut etre mettre dans les pages a la place, a voir. Demander a James la meilleure maniere de proceder. */}
 			<SafeAreaView style={styles.container}>
 				<NavigationContainer>
