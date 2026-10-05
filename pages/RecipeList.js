@@ -41,7 +41,6 @@ export default function RecipeList({ navigation, route }) {
 
     const [recipes, setRecipes] = useState([
         {
-            // id: 1,
             category: 1,
             name: 'Zebre',
             durationHours: 0,
@@ -49,7 +48,6 @@ export default function RecipeList({ navigation, route }) {
             description: 'jsp'
         },
         {
-            // id: 2,
             category: 2,
             name: 'Allo',
             durationHours: 5,
@@ -57,7 +55,6 @@ export default function RecipeList({ navigation, route }) {
             description: 'lol'
         },
         {
-            // id: 3,
             category: 3,
             name: 'Test',
             durationHours: 10,
@@ -97,17 +94,9 @@ export default function RecipeList({ navigation, route }) {
 
     return (
         <View style={{ flex: 1, padding: 20 }}>
-            <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-start', borderRadius: 10000 }}>
-                <Pressable style={[styles.newRecipeButton, { backgroundColor: 'blue' }]} onPress={handleViewRecipe}>
-                    <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>View</Text>
-                </Pressable>
-            </View>
-
-            {/* <Text style={{ color: 'white' }}>{JSON.stringify(sortedRecipes)}</Text> */}
-            {/* <Text style={{ color: 'white' }}>{sortedRecipes.length == 0 ? "No recipes yet..." : JSON.stringify(sortedRecipes)}</Text> */}
             <FlatList
                 data={sortedRecipes}
-                ListEmptyComponent={<Text style={{ color: 'white' }}>No recipes yet...</Text>}
+                ListEmptyComponent={<Text style={{ color: 'white', fontSize: 32, fontWeight: 'bold', alignSelf: 'center' }}>No recipes yet...</Text>}
                 renderItem={({ item }) => <RecipeItem recipe={item} />}
                 ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: 'white' }} />}
             />
