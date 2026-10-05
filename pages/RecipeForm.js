@@ -7,7 +7,6 @@ import { styles } from '../style/Style.js';
 import { Toast } from 'toastify-react-native';
 
 export default function RecipeForm({ navigation, route }) {
-	// TODO adapter pour recevoir une recette si d'un view
 	const { mode, recipe } = route.params;
 
 	const [recipeInfos, setRecipeInfos] = useState({
@@ -49,14 +48,12 @@ export default function RecipeForm({ navigation, route }) {
 	}
 
 	function handleDeleteRecipe() {
-		// console.log(recipeInfos);
 		navigation.popTo('RecipeList');
 	}
 
 	return (
 		<View style={{ flex: 1, padding: 20 }}>
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around', }}>
-				{/*onPress={setSelectedId}*/}
 				<RadioGroup layout="row" radioButtons={options} selectedId={recipeInfos.category} onPress={(value) => setRecipeInfos({ ...recipeInfos, category: value })} />
 			</View>
 
@@ -87,7 +84,6 @@ export default function RecipeForm({ navigation, route }) {
 			</View>
 
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-				{/* <Button color="#f2a93b" title="Save" onPress={() => handleClick("Save")} /> */}
 				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }}  onPress={mode === 'newRecipe' ? handleSaveRecipe : handleDeleteRecipe}>
 					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
 				</Pressable>

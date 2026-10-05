@@ -23,8 +23,6 @@ export default function App() {
 	return (
 		<SafeAreaProvider>
 			<ToastManager />
-			{/* peut etre mettre dans les pages a la place, a voir. Demander a James la meilleure maniere de proceder. */}
-			{/* <SafeAreaView style={styles.container}> */}
 				<NavigationContainer>
 					<Stack.Navigator
 						initialRouteName="LogIn"
@@ -55,7 +53,6 @@ export default function App() {
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>
-			{/* </SafeAreaView> */}
 		</SafeAreaProvider>
 	)
 }

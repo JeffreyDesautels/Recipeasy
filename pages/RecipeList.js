@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable, FlatList } from 'react-native';
 import { styles } from '../style/Style.js';
 
 export default function RecipeList({ navigation, route }) {
-    // TODO envisager une liste d'elements JSON?
 
     const [recipes, setRecipes] = useState([
         {
@@ -60,14 +59,30 @@ export default function RecipeList({ navigation, route }) {
 
     return (
         <View style={{ flex: 1, padding: 20 }}>
-            {/* TODO travailler sur le bouton view (envoyer une recette random) */}
             <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-start', borderRadius: 10000 }}>
                 <Pressable style={[styles.newRecipeButton, { backgroundColor: 'blue' }]} onPress={handleViewRecipe}>
                     <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>View</Text>
                 </Pressable>
             </View>
 
-            <Text style={{ color: 'white' }}>{JSON.stringify(sortedRecipes)}</Text>
+            {/* <Text style={{ color: 'white' }}>{JSON.stringify(sortedRecipes)}</Text> */}
+            {/* <Text style={{ color: 'white' }}>{sortedRecipes.length == 0 ? "No recipes yet..." : JSON.stringify(sortedRecipes)}</Text> */}
+            <FlatList
+                data={sortedRecipes}
+                renderItem={({ item }) => {
+                    return (
+                        <Text
+                            style={{
+                                padding: 16,
+                                textAlign: 'center',
+                                color: 'white'
+                            }}
+                        >
+                            {item.name}
+                        </Text>
+                    )
+                }}
+            />
 
             <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'flex-end', borderRadius: 10000 }}>
                 <Pressable style={styles.newRecipeButton} onPress={handleNewRecipe}>
