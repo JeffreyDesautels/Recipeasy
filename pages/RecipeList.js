@@ -4,11 +4,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../style/Style.js';
 
 export default function RecipeList({ navigation, route }) {
+    // TODO
+    // ajouter indexation des items?
+    // item devient blanc sur select?
+    // 
 
     function RecipeIcon({ category }) {
-        if (category == 1) return <Ionicons name="cafe" size={22} color={'#f2a93b'} />
-        if (category == 2) return <Ionicons name="fast-food" size={22} color={'#03ff00'} />
-        if (category == 3) return <Ionicons name="restaurant" size={22} color={'#00008b'} />
+        if (category == 1) return <Ionicons name="cafe" size={28} color={'#f2a93b'} />
+        if (category == 2) return <Ionicons name="fast-food" size={28} color={'#03ff00'} />
+        if (category == 3) return <Ionicons name="restaurant" size={28} color={'#00008b'} />
     }
 
     function RecipeItem({ recipe }) {
@@ -16,16 +20,16 @@ export default function RecipeList({ navigation, route }) {
             <TouchableOpacity
                 onPress={() => handleViewRecipe(recipe)}
             >
-                <View style={{ flex: 1, flexDirection: 'row', padding: 8 }}>
-                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                <View style={{ flex: 1, flexDirection: 'row', paddingTop: 15, paddingBottom: 15 }}>
+                    <View style={{ flex: 1 }}>
                         <RecipeIcon category={recipe.category} />
-                        <Text style={{ color: 'lightgray' }}>{`${recipe.durationHours}h${recipe.durationMinutes < 10 ? '0' : ''}${recipe.durationMinutes}`}</Text>
+                        <Text style={{ color: 'lightgray', fontSize: 14, fontWeight: 'bold' }}>{`${recipe.durationHours}h${recipe.durationMinutes < 10 ? '0' : ''}${recipe.durationMinutes}`}</Text>
                     </View>
 
-                    <View style={{ flex: 10, flexDirection: 'column' }}>
+                    <View style={{ flex: 6 }}>
                         <Text
                             style={{
-                                fontSize: 16,
+                                fontSize: 20,
                                 fontWeight: 'bold',
                                 color: 'white'
                             }}
@@ -79,10 +83,6 @@ export default function RecipeList({ navigation, route }) {
 
         return 0;
     });
-
-    function getRandomRecipe() {
-        return recipes[Math.floor(Math.random() * recipes.length)];
-    }
 
     function handleViewRecipe(recipe) {
         navigation.navigate('RecipeForm', { mode: 'viewRecipe', recipe: recipe });
