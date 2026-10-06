@@ -4,10 +4,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../style/Style.js';
 
 export default function RecipeList({ navigation, route }) {
-    // TODO
-    // ajouter indexation des items?
-    // item devient blanc sur select?
-    // 
 
     function RecipeIcon({ category }) {
         if (category == 1) return <Ionicons name="cafe" size={28} color={'#f2a93b'} />
@@ -28,6 +24,7 @@ export default function RecipeList({ navigation, route }) {
 
                     <View style={{ flex: 6 }}>
                         <Text
+                            numberOfLines={1} 
                             style={{
                                 fontSize: 20,
                                 fontWeight: 'bold',
@@ -36,7 +33,7 @@ export default function RecipeList({ navigation, route }) {
                         >
                             {`${recipe.name}`}
                         </Text>
-                        <Text style={{ color: 'lightgray' }}>{`${recipe.description}`}</Text>
+                        <Text numberOfLines={1} style={{ color: 'lightgray' }}>{`${recipe.description}`}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
@@ -46,17 +43,17 @@ export default function RecipeList({ navigation, route }) {
     const [recipes, setRecipes] = useState([
         {
             category: 1,
-            name: 'Zebre',
+            name: 'Zebreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
             durationHours: 0,
             durationMinutes: 1,
-            description: 'jsp'
+            description: 'jspppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp'
         },
         {
             category: 2,
             name: 'Allo',
             durationHours: 5,
             durationMinutes: 15,
-            description: 'lol'
+            description: ''
         },
         {
             category: 3,
