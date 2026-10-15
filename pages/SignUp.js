@@ -11,9 +11,14 @@ export default function SignUp({ navigation }) {
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
 	async function handleCreateAccount() {
+		if (credentials.password !== passwordConfirmation) {
+			Toast.error("Passwords are not matching!");
+			return;
+		}
+
 		const success = await auth.signUp(credentials);
 
-		if (success && credentials.password === passwordConfirmation) {
+		if (success) {
 			Toast.success(`Welcome ${credentials.username}!`);
 			navigation.popToTop();
 			navigation.replace('RecipeList');
