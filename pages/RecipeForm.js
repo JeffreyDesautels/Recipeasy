@@ -83,10 +83,10 @@ export default function RecipeForm({ navigation, route }) {
 				<Field style={{ height: '100%' }} label="Description" multiline={true} value={recipeInfos.description} onChangeText={(text) => setRecipeInfos({ ...recipeInfos, description: text })} />
 			</View>
 
-			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-				<Pressable style={{ backgroundColor: "#f2a93b", padding: 10, borderRadius: 5 }}>
+			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
+				{/* <Pressable style={{ backgroundColor: "#f2a93b", padding: 10, borderRadius: 5 }}>
 					<Text style={{ color: "white" }}>Save</Text>
-				</Pressable>
+				</Pressable> */}
 				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }} onPress={mode === 'newRecipe' ? handleSaveRecipe : handleDeleteRecipe}>
 					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
 				</Pressable>
