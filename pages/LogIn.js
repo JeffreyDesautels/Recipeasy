@@ -3,17 +3,19 @@ import { useState, useEffect } from 'react';
 import { Field } from '../components/Components.js';
 import { styles } from '../style/Style.js';
 import UserCredentials from '../models/UserCredentials.js';
+import auth from '../services/AuthService.js';
 
 export default function LogIn({ navigation }) {
     const [credentials, setCredentials] = useState(new UserCredentials({ username: '', password: '' }))
+    const [user, setUser] = useState()
 
     async function handleLogIn() {
         // navigation.replace('RecipeList');
-        // const success = await auth.logIn(credentials);
+        const success = await auth.logIn(credentials);
 
-        // console.log({ success, user: auth.currentUser });
-        
-        console.log(credentials);
+        console.log({ success, user: auth.currentUser });
+
+        // console.log(credentials);
     }
 
     function handleSignUp() {
