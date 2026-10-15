@@ -9,29 +9,31 @@ class AuthService {
     }
 
     async signUp(credentials) {
-        // const response = await fetch("http://martha.jh.shawinigan.info/queries/insert-user/execute", {
-        //     method: 'POST',
-        //     body: JSON.stringify(credentials),
-        //     headers: {
-        //         'auth': 'ZGVtbzpSZWFjdE5hdGl2ZTIwMjQh'
-        //     }
-        // }).then((r) => r.json())
-
-        // if (response.success)  {
-        //     this.#currentUser = new User({ id: response.lastInsertId, username: credentials.username })
-        // }
-
-        // return !!this.#currentUser
-    }
-
-    async logIn(credentials) {
-        const response = await fetch("https://martha.jh.shawinigan.info/queries/select-user-auth/execute", {
+        const response = await fetch("http://martha.jh.shawinigan.info/queries/insert-user/execute", {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: {
-                'auth': 'ZGVtbzpSZWFjdE5hdGl2ZTIwMjQh'
+                'auth': btoa("jeffrey:8F96ba62a6f3d81*adcdbc8c8c5")
             }
         }).then((r) => r.json())
+
+        if (response.success)  {
+            this.#currentUser = new User({ id: response.lastInsertId, username: credentials.username })
+        }
+
+        return !!this.#currentUser
+    }
+
+    async logIn(credentials) {
+        const response = await fetch("http://martha.jh.shawinigan.info/queries/select-user-auth/execute", {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: {
+                'auth': btoa("jeffrey:8F96ba62a6f3d81*adcdbc8c8c5")
+            }
+        }).then((r) => r.json())
+
+        console.log(response);
 
         if (response.success && response.data.length == 1)  {
             const user = response.data[0]

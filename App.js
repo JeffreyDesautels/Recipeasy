@@ -7,14 +7,20 @@ import RecipeForm from './pages/RecipeForm.js';
 import { styles } from './style/Style.js';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import auth from './services/AuthService.js';
 import ToastManager from 'toastify-react-native';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+	function handleLogOut(navigation) {
+		auth.logOut();
+		navigation.replace('LogIn');
+	}
+
 	function LogOutBtn({ navigation }) {
 		return (
-			<Pressable style={{ paddingRight: 10 }} onPress={() => navigation.replace('LogIn')}>
+			<Pressable style={{ paddingRight: 10 }} onPress={() => handleLogOut(navigation)}>
 				<Text style={{ color: 'white' }}>Log out</Text>
 			</Pressable>
 		)
