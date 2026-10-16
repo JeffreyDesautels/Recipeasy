@@ -2,8 +2,26 @@ import { useState, useEffect } from 'react';
 import { Text, View, Pressable, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../style/Style.js';
+import auth from '../services/AuthService.js'
+import recipeService from '../services/RecipeService.js'
 
 export default function RecipeList({ navigation, route }) {
+
+    console.log(auth.currentUser.id);
+
+    const loadRecipes = async () => {
+        await recipeService.selectAll(auth.currentUser.id)
+    };
+
+    // useEffect quand page chargee
+    useEffect(() => {
+        loadRecipes();
+    }, []);
+
+
+
+
+
 
     function RecipeIcon({ category }) {
         if (category == 1) return <Ionicons name="cafe" size={28} color={'#f2a93b'} />
@@ -24,7 +42,7 @@ export default function RecipeList({ navigation, route }) {
 
                     <View style={{ flex: 6 }}>
                         <Text
-                            numberOfLines={1} 
+                            numberOfLines={1}
                             style={{
                                 fontSize: 20,
                                 fontWeight: 'bold',
@@ -40,29 +58,30 @@ export default function RecipeList({ navigation, route }) {
         )
     }
 
-    const [recipes, setRecipes] = useState([
-        {
-            category: 1,
-            name: 'Zebreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-            durationHours: 0,
-            durationMinutes: 1,
-            description: 'jspppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp'
-        },
-        {
-            category: 2,
-            name: 'Allo',
-            durationHours: 5,
-            durationMinutes: 15,
-            description: ''
-        },
-        {
-            category: 3,
-            name: 'Test',
-            durationHours: 10,
-            durationMinutes: 30,
-            description: 'hmmm'
-        },
-    ]);
+    const [recipes, setRecipes] = useState([]);
+    // const [recipes, setRecipes] = useState([
+    // {
+    //     category: 1,
+    //     name: 'Zebreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
+    //     durationHours: 0,
+    //     durationMinutes: 1,
+    //     description: 'jspppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp'
+    // },
+    // {
+    //     category: 2,
+    //     name: 'Allo',
+    //     durationHours: 5,
+    //     durationMinutes: 15,
+    //     description: ''
+    // },
+    // {
+    //     category: 3,
+    //     name: 'Test',
+    //     durationHours: 10,
+    //     durationMinutes: 30,
+    //     description: 'hmmm'
+    // },
+    // ]);
 
     useEffect(() => {
         if (route.params?.newRecipe) {

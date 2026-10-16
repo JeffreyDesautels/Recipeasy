@@ -1,56 +1,23 @@
-import User from '../models/User.js';
+import Recipe from '../models/Recipe.js';
 
 class RecipeService {
+    async selectAll(userId) {
+        const response = await fetch("http://martha.jh.shawinigan.info/queries/select-recipes/execute", {
+            method: 'POST',
+            body: JSON.stringify({ id: userId }),
+            headers: {
+                'auth': btoa("jeffrey:8F96ba62a6f3d81*adcdbc8c8c5")
+            }
+        }).then((r) => r.json())
 
-    // #currentUser = null // ATTENTION, à utiliser judicieusement
+        console.log(response);
 
-    // get currentUser() {
-    //     return this.#currentUser
-    // }
-
-    // async signUp(credentials) {
-    //     const response = await fetch("http://martha.jh.shawinigan.info/queries/insert-user/execute", {
-    //         method: 'POST',
-    //         body: JSON.stringify(credentials),
-    //         headers: {
-    //             'auth': btoa("jeffrey:8F96ba62a6f3d81*adcdbc8c8c5")
-    //         }
-    //     }).then((r) => r.json())
-
-    //     if (response.success)  {
-    //         this.#currentUser = new User({ id: response.lastInsertId, username: credentials.username })
-    //     }
-
-    //     return !!this.#currentUser
-    // }
-
-    // async logIn(credentials) {
-    //     const response = await fetch("http://martha.jh.shawinigan.info/queries/select-user-auth/execute", {
-    //         method: 'POST',
-    //         body: JSON.stringify(credentials),
-    //         headers: {
-    //             'auth': btoa("jeffrey:8F96ba62a6f3d81*adcdbc8c8c5")
-    //         }
-    //     }).then((r) => r.json())
-
-    //     console.log(response);
-
-    //     if (response.success && response.data.length == 1)  {
-    //         const user = response.data[0]
-
-    //         this.#currentUser = new User({ id: user.id, username: user.username })
-    //         console.log(JSON.stringify(this.#currentUser))
-    //     } else {
-    //         this.#currentUser = null
-    //     }
-
-    //     return !!this.#currentUser
-    // }
-
-    // logOut() {
-    //   this.#currentUser = null
-    // }
-
+        if (response.success) {
+            // retourner liste recette 
+        } else {
+            return [];
+        }
+    }
 }
 
 const service = new RecipeService();
