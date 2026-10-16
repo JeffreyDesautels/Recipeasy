@@ -2,14 +2,16 @@ export default class Recipe {
 
     #id;
 
-    constructor({ id, category, name, durationHours, durationMinutes, description, userId }) {
+    constructor({ id, category, name, duration_hours, duration_minutes, description, user_id }) {
         this.#id = id
         this.category = category
         this.name = name
-        this.durationHours = durationHours
-        this.durationMinutes = durationMinutes
+        this.durationHours = duration_hours
+        this.durationMinutes = duration_minutes
         this.description = description
-        this.userId = userId
+        this.userId = user_id
+
+        console.log(this);
     }
 
     get id() {

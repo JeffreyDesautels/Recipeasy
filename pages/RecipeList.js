@@ -7,13 +7,13 @@ import recipeService from '../services/RecipeService.js'
 
 export default function RecipeList({ navigation, route }) {
 
-    console.log(auth.currentUser.id);
+    // console.log(auth.currentUser.id);
 
     const loadRecipes = async () => {
-        await recipeService.selectAll(auth.currentUser.id)
+        setRecipes(await recipeService.selectRecipes(auth.currentUser.id));
     };
 
-    // useEffect quand page chargee
+    // useEffect quand page chargee... useFocusEffect?
     useEffect(() => {
         loadRecipes();
     }, []);
@@ -59,36 +59,16 @@ export default function RecipeList({ navigation, route }) {
     }
 
     const [recipes, setRecipes] = useState([]);
-    // const [recipes, setRecipes] = useState([
-    // {
-    //     category: 1,
-    //     name: 'Zebreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-    //     durationHours: 0,
-    //     durationMinutes: 1,
-    //     description: 'jspppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp'
-    // },
-    // {
-    //     category: 2,
-    //     name: 'Allo',
-    //     durationHours: 5,
-    //     durationMinutes: 15,
-    //     description: ''
-    // },
-    // {
-    //     category: 3,
-    //     name: 'Test',
-    //     durationHours: 10,
-    //     durationMinutes: 30,
-    //     description: 'hmmm'
-    // },
-    // ]);
 
+    // considerer supprimer ceci
     useEffect(() => {
         if (route.params?.newRecipe) {
             const newRecipe = route.params.newRecipe;
             setRecipes([...recipes, newRecipe]);
         }
     }, [route.params?.newRecipe]);
+    // considerer supprimer ceci
+
 
     const sortedRecipes = [...recipes].sort((a, b) => {
         const nameA = a.name.toUpperCase();
