@@ -10,14 +10,10 @@ export default function LogIn({ navigation }) {
     const [credentials, setCredentials] = useState(new UserCredentials({ username: '', password: '' }));
 
     async function handleLogIn() {
-        // console.log(credentials);
-
         const success = await auth.logIn(credentials);
 
-        // console.log({ success, user: auth.currentUser });
-
         if (success) {
-			Toast.success(`Welcome ${credentials.username}!`);
+			Toast.success(`Welcome back ${credentials.username}!`);
             navigation.replace('RecipeList');
         } else {
 			Toast.error("Invalid credentials!");

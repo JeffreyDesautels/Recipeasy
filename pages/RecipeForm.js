@@ -130,8 +130,7 @@ export default function RecipeForm({ navigation, route }) {
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
 				{mode !== 'newRecipe' && (
 					<Pressable style={{ backgroundColor: "#f2a93b", padding: 10, marginRight: 5, borderRadius: 5 }} onPress={handleUpdateRecipe}>
-						{/* <Pressable style={{ backgroundColor: "#f2a93b", padding: 10, marginRight: 5, borderRadius: 5 }}> */}
-						<Text style={{ color: "white" }}>Edit</Text>
+						<Text style={{ color: "white" }}>Save</Text>
 					</Pressable>
 				)}
 				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }} onPress={mode === 'newRecipe' ? handleInsertRecipe : handleDeleteRecipe}>

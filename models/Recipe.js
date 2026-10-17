@@ -10,8 +10,6 @@ export default class Recipe {
         this.durationMinutes = duration_minutes
         this.description = description
         this.userId = user_id
-
-        console.log(this);
     }
 
     get id() {

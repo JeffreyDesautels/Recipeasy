@@ -8,25 +8,15 @@ import recipeService from '../services/RecipeService.js'
 
 export default function RecipeList({ navigation, route }) {
 
-    // console.log(auth.currentUser.id);
-
     const loadRecipes = async () => {
         setRecipes(await recipeService.selectRecipes(auth.currentUser.id));
     };
-
-    // useEffect quand page chargee... useFocusEffect?
-    // useEffect(() => {
-    //     loadRecipes();
-    // }, []);
 
     useFocusEffect(
         useCallback(() => {
             loadRecipes();
         }, [])
     );
-
-
-
 
 
 
