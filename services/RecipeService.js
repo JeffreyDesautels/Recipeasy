@@ -36,9 +36,8 @@ class RecipeService {
             }
         }).then((r) => r.json())
 
-        console.log(response);
-
         //todo
+        console.log(response);
     }
 
     async deleteRecipe(id, userId) {
@@ -51,6 +50,7 @@ class RecipeService {
         }).then((r) => r.json())
 
         //todo
+        console.log(response);
     }
 
     async updateRecipe(recipe, userId) {
@@ -71,6 +71,7 @@ class RecipeService {
         }).then((r) => r.json())
 
         //todo
+        console.log(response);
     }
 }
 
