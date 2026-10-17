@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { Text, View, Pressable, FlatList, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { styles } from '../style/Style.js';
@@ -14,9 +15,15 @@ export default function RecipeList({ navigation, route }) {
     };
 
     // useEffect quand page chargee... useFocusEffect?
-    useEffect(() => {
-        loadRecipes();
-    }, []);
+    // useEffect(() => {
+    //     loadRecipes();
+    // }, []);
+
+    useFocusEffect(
+        useCallback(() => {
+            loadRecipes();
+        }, [])
+    );
 
 
 
@@ -61,12 +68,12 @@ export default function RecipeList({ navigation, route }) {
     const [recipes, setRecipes] = useState([]);
 
     // considerer supprimer ceci
-    useEffect(() => {
-        if (route.params?.newRecipe) {
-            const newRecipe = route.params.newRecipe;
-            setRecipes([...recipes, newRecipe]);
-        }
-    }, [route.params?.newRecipe]);
+    // useEffect(() => {
+    //     if (route.params?.newRecipe) {
+    //         const newRecipe = route.params.newRecipe;
+    //         setRecipes([...recipes, newRecipe]);
+    //     }
+    // }, [route.params?.newRecipe]);
     // considerer supprimer ceci
 
 

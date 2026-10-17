@@ -38,6 +38,8 @@ class RecipeService {
 
         //todo
         console.log(response);
+
+        return response.success;
     }
 
     async deleteRecipe(id, userId) {
@@ -51,6 +53,8 @@ class RecipeService {
 
         //todo
         console.log(response);
+
+        return response.success;
     }
 
     async updateRecipe(recipe, userId) {
@@ -72,6 +76,8 @@ class RecipeService {
 
         //todo
         console.log(response);
+
+        return response.success;
     }
 }
 

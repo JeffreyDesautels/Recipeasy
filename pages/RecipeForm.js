@@ -12,6 +12,7 @@ export default function RecipeForm({ navigation, route }) {
 	const { mode, recipe } = route.params;
 
 	const [recipeInfos, setRecipeInfos] = useState({
+		id: recipe?.id || undefined,
 		category: undefined,
 		name: '',
 		durationHours: 0,
@@ -28,7 +29,7 @@ export default function RecipeForm({ navigation, route }) {
 		labelStyle: { color: '#FFFFFF' }
 	}));
 
-	function handleSaveRecipe() {
+	function handleFormErrors() {
 		let errorLog = [];
 
 		if (recipeInfos.category == undefined) {
@@ -41,16 +42,57 @@ export default function RecipeForm({ navigation, route }) {
 			errorLog.push("Durée invalide!");
 		}
 
-		if (errorLog.length == 0) {
-			Toast.success("Valid recipe added!");
-			navigation.popTo('RecipeList', { newRecipe: recipeInfos });
+		return errorLog;
+	}
+
+	async function handleInsertRecipe() {
+		const errors = handleFormErrors();
+
+		if (errors.length !== 0) {
+			Toast.error(errors.join("\n"));
+			return;
+		}
+
+		console.log(recipeInfos);
+		const success = await recipeService.insertRecipe(recipeInfos, auth.currentUser.id);
+
+		if (success) {
+			Toast.success("Recipe added successfully!");
+			navigation.popTo('RecipeList');
 		} else {
-			Toast.error(errorLog.join("\n"));
+			Toast.error("An error occured while adding recipe.");
 		}
 	}
 
-	function handleDeleteRecipe() {
-		navigation.popTo('RecipeList');
+	async function handleDeleteRecipe() {
+		console.log(recipeInfos);
+		const success = await recipeService.deleteRecipe(recipeInfos.id, auth.currentUser.id);
+
+		if (success) {
+			Toast.success("Recipe deleted successfully!");
+			navigation.popTo('RecipeList');
+		} else {
+			Toast.error("An error occured while deleting recipe.");
+		}
+	}
+
+	async function handleUpdateRecipe() {
+		const errors = handleFormErrors();
+
+		if (errors.length !== 0) {
+			Toast.error(errors.join("\n"));
+			return;
+		}
+
+		console.log(recipeInfos);
+		const success = await recipeService.updateRecipe(recipeInfos, auth.currentUser.id);
+
+		if (success) {
+			Toast.success("Recipe updated successfully!");
+			navigation.popTo('RecipeList');
+		} else {
+			Toast.error("An error occured while updating recipe.");
+		}
 	}
 
 	return (
@@ -87,11 +129,12 @@ export default function RecipeForm({ navigation, route }) {
 
 			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }}>
 				{mode !== 'newRecipe' && (
-					<Pressable style={{ backgroundColor: "#f2a93b", padding: 10, marginRight: 5, borderRadius: 5 }}>
-						<Text style={{ color: "white" }}>Save</Text>
+					<Pressable style={{ backgroundColor: "#f2a93b", padding: 10, marginRight: 5, borderRadius: 5 }} onPress={handleUpdateRecipe}>
+						{/* <Pressable style={{ backgroundColor: "#f2a93b", padding: 10, marginRight: 5, borderRadius: 5 }}> */}
+						<Text style={{ color: "white" }}>Edit</Text>
 					</Pressable>
 				)}
-				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }} onPress={mode === 'newRecipe' ? handleSaveRecipe : handleDeleteRecipe}>
+				<Pressable style={{ backgroundColor: mode === 'newRecipe' ? "#f2a93b" : "white", padding: 10, borderRadius: 5 }} onPress={mode === 'newRecipe' ? handleInsertRecipe : handleDeleteRecipe}>
 					<Text style={{ color: mode === 'newRecipe' ? "white" : "red" }}>{mode === 'newRecipe' ? "Save" : "Delete"}</Text>
 				</Pressable>
 			</View>
